@@ -1,6 +1,7 @@
 package com.aditya.pindrop;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.FragmentActivity;
@@ -8,17 +9,15 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.Manifest;
-import android.annotation.SuppressLint;
-import android.content.DialogInterface;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Switch;
+import android.widget.Toolbar;
 
+import com.android.volley.BuildConfig;
 import com.google.android.gms.location.GeofencingClient;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -27,6 +26,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
@@ -34,12 +34,9 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.Collections;
 import java.util.List;
 
-import io.realm.Realm;
-
-public class MapsActivity extends FragmentActivity implements OnMapReadyCallback,
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
         GeoFenceAdapter.ItemListener, GoogleMap.OnMapLongClickListener {
 
-    private Realm mRealm;
     private GoogleMap mMap;
     private GeofencingClient mGeoFencingClient;
     private GeoFenceAdapter mAdapter;
@@ -54,12 +51,18 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         setTheme(R.style.Theme_PinDrop);
         setContentView(R.layout.activity_maps);
 
-        initDb();
         setupMap();
         setupGeoFencing();
         setupToolbar();
         setupRv();
         updateRv();
+
+        askPermissions(new String[]{
+                Manifest.permission.ACCESS_NOTIFICATION_POLICY,
+                Manifest.permission.ACCESS_BACKGROUND_LOCATION,
+                Manifest.permission.ACCESS_COARSE_LOCATION,
+                Manifest.permission.ACCESS_FINE_LOCATION
+        },101);
         /*if (Build.VERSION.SDK_INT==29){
             askPermissions(
                     new String[] {
@@ -103,8 +106,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     /** Toolbar Related **/
 
     private void setupToolbar() {
-        setActionBar(findViewById(R.id.toolbar));
-        getActionBar().setIcon(R.drawable.ic_app_40);
+
+        setSupportActionBar(findViewById(R.id.toolbar));
+        getSupportActionBar().setIcon(R.drawable.ic_app_40);
     }
 
     @Override
@@ -117,8 +121,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.info_menu) {
             View view = LayoutInflater.from(this).inflate(R.layout.app_info_view, findViewById(R.id.list_rv), false);
-            MaterialTextView codeTv = findViewById(R.id.code_show_tv);
-            MaterialTextView nameTv = findViewById(R.id.name_show_tv);
+            MaterialTextView codeTv = view.findViewById(R.id.code_show_tv);
+            MaterialTextView nameTv = view.findViewById(R.id.name_show_tv);
             nameTv.setText(BuildConfig.VERSION_NAME);
             codeTv.setText(String.valueOf(BuildConfig.VERSION_CODE));
             new MaterialAlertDialogBuilder(this).setCancelable(true).setView(view).show();
@@ -198,8 +202,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void setupMap() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
         if(mapFragment!=null) mapFragment.getMapAsync(this);
-
-        mMap.setOnMapLongClickListener(this);
     }
 
     @Override
@@ -227,6 +229,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
+        mMap.setOnMapLongClickListener(this);
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
@@ -244,18 +247,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
     private List<GeoFenceEntity> getGeoFences(){
         return Collections.emptyList();
-    }
-
-    private void initDb() {
-        super.onStart();
-        Realm.init(this);
-        mRealm=Realm.getDefaultInstance();
-        mRealm.beginTransaction();
-    }
-
-    @Override
-    protected void onDestroy() {
-        mRealm.commitTransaction();
-        super.onDestroy();
     }
 }

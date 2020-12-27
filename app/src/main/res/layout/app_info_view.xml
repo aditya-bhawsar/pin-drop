@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/white"
     xmlns:tools="http://schemas.android.com/tools">
 
     <ImageView
@@ -28,6 +30,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="12dp"
         android:text="@string/app_name"
+        android:gravity="center"
         android:textAlignment="center"
         android:textColor="@color/colorPrimary"
         android:textSize="25sp"
@@ -68,7 +71,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1.5"
+                android:textColor="@android:color/darker_gray"
                 tools:text="1.0.2"
+                android:gravity="end"
                 android:textAlignment="viewEnd"
                 android:textSize="17sp"
                 android:textStyle="italic|bold" />
@@ -97,7 +102,9 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="5dp"
                 android:layout_weight="1.5"
+                android:gravity="end"
                 tools:text="1.0.2"
+                android:textColor="@android:color/darker_gray"
                 android:textAlignment="viewEnd"
                 android:textSize="17sp"
                 android:textStyle="italic|bold" />
@@ -121,6 +128,7 @@
         android:layout_marginTop="15dp"
         android:text="\nNeed Alteration, help or another app created?\nContact Here!"
         android:textAlignment="center"
+        android:gravity="center"
         android:textColor="@android:color/black"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/version_table" />

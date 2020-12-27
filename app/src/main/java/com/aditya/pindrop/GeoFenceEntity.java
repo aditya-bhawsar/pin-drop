@@ -1,8 +1,7 @@
 package com.aditya.pindrop;
 
-import io.realm.RealmObject;
 
-public class GeoFenceEntity extends RealmObject {
+public class GeoFenceEntity {
 
     private Double lat,longt;
     private String name,id;
@@ -15,14 +14,4 @@ public class GeoFenceEntity extends RealmObject {
     public void setName(String name) { this.name = name; }
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
-
-    @Override
-    public String toString() {
-        return "GeoFenceDao{" +
-                "lat=" + lat +
-                ", longt=" + longt +
-                ", name='" + name + '\'' +
-                ", id='" + id + '\'' +
-                '}';
-    }
 }
