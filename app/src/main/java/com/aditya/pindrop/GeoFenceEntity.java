@@ -1,6 +1,8 @@
 package com.aditya.pindrop;
 
+import androidx.room.Entity;
 
+@Entity(tableName = "geofence")
 public class GeoFenceEntity {
 
     private Double lat,longt;
