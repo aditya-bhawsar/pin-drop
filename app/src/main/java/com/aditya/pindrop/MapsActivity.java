@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -15,7 +14,6 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Toolbar;
 
 import com.android.volley.BuildConfig;
 import com.google.android.gms.location.GeofencingClient;
@@ -26,7 +24,6 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textview.MaterialTextView;
@@ -34,8 +31,11 @@ import com.google.android.material.textview.MaterialTextView;
 import java.util.Collections;
 import java.util.List;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback,
-        GeoFenceAdapter.ItemListener, GoogleMap.OnMapLongClickListener {
+public class MapsActivity extends AppCompatActivity implements
+        OnMapReadyCallback,
+        GeoFenceAdapter.ItemListener,
+        GoogleMap.OnMapLongClickListener
+{
 
     private GoogleMap mMap;
     private GeofencingClient mGeoFencingClient;
