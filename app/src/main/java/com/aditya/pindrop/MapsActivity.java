@@ -45,8 +45,10 @@ public class MapsActivity extends AppCompatActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         try { Thread.sleep(700); }
         catch (Exception e){ e.printStackTrace(); }
+
         setTheme(R.style.Theme_PinDrop);
         setContentView(R.layout.activity_maps);
 
