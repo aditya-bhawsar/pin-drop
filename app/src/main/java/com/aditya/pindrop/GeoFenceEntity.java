@@ -1,12 +1,15 @@
 package com.aditya.pindrop;
 
 import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
 @Entity(tableName = "geofence")
 public class GeoFenceEntity {
 
     private Double lat,longt;
-    private String name,id;
+    @PrimaryKey(autoGenerate = true)
+    private String id;
+    private String name;
 
     public Double getLat() { return lat; }
     public void setLat(Double lat) { this.lat = lat; }

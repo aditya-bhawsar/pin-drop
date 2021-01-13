@@ -46,8 +46,11 @@ public class MapsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try { Thread.sleep(700); }
-        catch (Exception e){ e.printStackTrace(); }
+        try {
+            Thread.sleep(700);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
 
         setTheme(R.style.Theme_PinDrop);
         setContentView(R.layout.activity_maps);
@@ -63,7 +66,7 @@ public class MapsActivity extends AppCompatActivity implements
                 Manifest.permission.ACCESS_BACKGROUND_LOCATION,
                 Manifest.permission.ACCESS_COARSE_LOCATION,
                 Manifest.permission.ACCESS_FINE_LOCATION
-        },101);
+        }, 101);
         /*if (Build.VERSION.SDK_INT==29){
             askPermissions(
                     new String[] {
@@ -98,23 +101,28 @@ public class MapsActivity extends AppCompatActivity implements
 
     /** Permissions Related **/
 
-    private void askPermissions(String[] permissions, int CODE) { ActivityCompat.requestPermissions(this,permissions,CODE); }
+    private void askPermissions(String[] permissions, int CODE) {
+        ActivityCompat.requestPermissions(this, permissions, CODE);
+    }
 
-    private boolean checkPermissions(String permission){ return ContextCompat.checkSelfPermission(this,permission) == PackageManager.PERMISSION_GRANTED; }
+    private boolean checkPermissions(String permission) {
+        return ContextCompat.checkSelfPermission(this, permission) == PackageManager.PERMISSION_GRANTED;
+    }
 
-    private boolean showRationale(String permission){ return ActivityCompat.shouldShowRequestPermissionRationale(this, permission); }
+    private boolean showRationale(String permission) {
+        return ActivityCompat.shouldShowRequestPermissionRationale(this, permission);
+    }
 
     /** Toolbar Related **/
 
     private void setupToolbar() {
-
         setSupportActionBar(findViewById(R.id.toolbar));
         getSupportActionBar().setIcon(R.drawable.ic_app_40);
     }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu,menu);
+        getMenuInflater().inflate(R.menu.main_menu, menu);
         return super.onCreateOptionsMenu(menu);
     }
 
@@ -135,22 +143,25 @@ public class MapsActivity extends AppCompatActivity implements
 
     private void setupRv() {
         RecyclerView listRv = findViewById(R.id.list_rv);
-        listRv.setLayoutManager(new LinearLayoutManager(this,LinearLayoutManager.HORIZONTAL,false));
-        mAdapter = new GeoFenceAdapter(Collections.emptyList(),this);
+        listRv.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        mAdapter = new GeoFenceAdapter(Collections.emptyList(), this);
         listRv.setAdapter(mAdapter);
     }
 
-    private void updateRv(){
+    private void updateRv() {
         List<GeoFenceEntity> geoFenceEntityList = getGeoFences();
-        if(geoFenceEntityList.isEmpty()){ findViewById(R.id.list_rv).setVisibility(View.GONE); }
-        else { findViewById(R.id.list_rv).setVisibility(View.VISIBLE); }
+        if (geoFenceEntityList.isEmpty()) {
+            findViewById(R.id.list_rv).setVisibility(View.GONE);
+        } else {
+            findViewById(R.id.list_rv).setVisibility(View.VISIBLE);
+        }
         mAdapter.refresh(geoFenceEntityList);
     }
 
     @Override
     public void deletePlace(GeoFenceEntity geoFence) {
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout,findViewById(R.id.list_rv),false);
-        TextInputEditText nameEt,latEt,longEt;
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout, findViewById(R.id.list_rv), false);
+        TextInputEditText nameEt, latEt, longEt;
         nameEt = view.findViewById(R.id.place_name_et);
         longEt = view.findViewById(R.id.place_long_et);
         latEt = view.findViewById(R.id.place_lat_et);
@@ -172,8 +183,8 @@ public class MapsActivity extends AppCompatActivity implements
 
     @Override
     public void placeShow(GeoFenceEntity geoFence) {
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout,findViewById(R.id.list_rv),false);
-        TextInputEditText nameEt,latEt,longEt;
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout, findViewById(R.id.list_rv), false);
+        TextInputEditText nameEt, latEt, longEt;
         nameEt = view.findViewById(R.id.place_name_et);
         longEt = view.findViewById(R.id.place_long_et);
         latEt = view.findViewById(R.id.place_lat_et);
@@ -193,8 +204,8 @@ public class MapsActivity extends AppCompatActivity implements
 
     /** GeoFence Related **/
 
-    private void setupGeoFencing(){
-        mGeoFencingClient= LocationServices.getGeofencingClient(this);
+    private void setupGeoFencing() {
+        mGeoFencingClient = LocationServices.getGeofencingClient(this);
         mGeoFenceHelper = new GeoFenceHelper(this);
     }
 
@@ -202,13 +213,13 @@ public class MapsActivity extends AppCompatActivity implements
 
     private void setupMap() {
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager().findFragmentById(R.id.map);
-        if(mapFragment!=null) mapFragment.getMapAsync(this);
+        if (mapFragment != null) mapFragment.getMapAsync(this);
     }
 
     @Override
     public void onMapLongClick(LatLng latLng) {
-        View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout,findViewById(R.id.list_rv),false);
-        TextInputEditText nameEt,latEt,longEt;
+        View view = LayoutInflater.from(this).inflate(R.layout.dialog_layout, findViewById(R.id.list_rv), false);
+        TextInputEditText nameEt, latEt, longEt;
         nameEt = view.findViewById(R.id.place_name_et);
         longEt = view.findViewById(R.id.place_long_et);
         latEt = view.findViewById(R.id.place_lat_et);
@@ -221,8 +232,9 @@ public class MapsActivity extends AppCompatActivity implements
                 .setIcon(R.drawable.ic_app_40)
                 .setTitle("Add Place")
                 .setMessage("Are you sure you want to add this place?")
-                .setPositiveButton("Save",(dialog, which) -> {})
-                .setNegativeButton("Cancel",null)
+                .setPositiveButton("Save", (dialog, which) -> {
+                })
+                .setNegativeButton("Cancel", null)
                 .setCancelable(true)
                 .show();
     }
@@ -234,6 +246,8 @@ public class MapsActivity extends AppCompatActivity implements
         LatLng sydney = new LatLng(-34, 151);
         mMap.addMarker(new MarkerOptions().position(sydney).title("Marker in Sydney"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(sydney));
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED)
+        mMap.setMyLocationEnabled(true);
     }
 
     /** Database Related **/
