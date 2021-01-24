@@ -3,8 +3,6 @@ package com.aditya.pindrop;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -19,6 +17,7 @@ public class GeoFenceAdapter extends RecyclerView.Adapter<GeoFenceAdapter.ViewHo
 
     List<GeoFenceEntity> geoFencesList;
     ItemListener itemListener;
+    Integer selected;
 
     public GeoFenceAdapter(List<GeoFenceEntity> geoFencesList, ItemListener PlaceListen) {
         this.geoFencesList= geoFencesList;
