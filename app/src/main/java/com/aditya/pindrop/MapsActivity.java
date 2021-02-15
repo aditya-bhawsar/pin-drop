@@ -49,6 +49,7 @@ public class MapsActivity extends AppCompatActivity implements
         catch (Exception e) { e.printStackTrace(); }
 
         setTheme(R.style.Theme_PinDrop);
+
         setContentView(R.layout.activity_maps);
 
         setupMap();
