@@ -1,12 +1,5 @@
 package com.aditya.pindrop;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
-
 import android.Manifest;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -14,6 +7,13 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.android.volley.BuildConfig;
 import com.google.android.gms.location.GeofencingClient;
@@ -45,8 +45,7 @@ public class MapsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        try { Thread.sleep(700); }
-        catch (Exception e) { e.printStackTrace(); }
+        try { Thread.sleep(700); } catch (Exception e) { e.printStackTrace(); }
 
         setTheme(R.style.Theme_PinDrop);
         setContentView(R.layout.activity_maps);
@@ -113,7 +112,9 @@ public class MapsActivity extends AppCompatActivity implements
 
     private void setupToolbar() {
         setSupportActionBar(findViewById(R.id.toolbar));
-        getSupportActionBar().setIcon(R.drawable.ic_app_40);
+
+        if(getSupportActionBar()!=null)
+            getSupportActionBar().setIcon(R.drawable.ic_app_40);
     }
 
     @Override
