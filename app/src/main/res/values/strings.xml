@@ -8,4 +8,8 @@
     <string name="longitude">Longitude</string>
     <string name="latitude">Latitude</string>
     <string name="place_name">Place Name</string>
+    <string name="location_permission">This app needs permission to use the device location in any state of device to function properly please click the continue button and allow the permissions</string>
+    <string name="background_location_permission">To perform complete actions intended by the app we need access to background location please provide the permissions for the complete functionality</string>
+    <string name="continue_btn_text">Continue</string>
+    <string name="settings_btn_text">Open Settings</string>
 </resources>

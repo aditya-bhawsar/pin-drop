@@ -50,7 +50,6 @@
                 android:orientation="horizontal"
                 tools:listitem="@layout/geofence_list_item"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
-
                 android:paddingBottom="20dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -61,7 +60,9 @@
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="4dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginTop="4dp"
         android:background="@android:color/transparent"
         android:elevation="0dp"
         app:elevation="0dp"
@@ -79,7 +80,7 @@
             <com.google.android.material.appbar.MaterialToolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
-                app:contentInsetStart="0dp"
+                app:contentInsetStart="8dp"
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent">
 
