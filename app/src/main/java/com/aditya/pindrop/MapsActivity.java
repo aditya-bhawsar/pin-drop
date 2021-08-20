@@ -46,7 +46,8 @@ public class MapsActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
 
         try {
-            Thread.sleep(700); }
+            Thread.sleep(700);
+        }
         catch (Exception e) {
             e.printStackTrace();
         }
