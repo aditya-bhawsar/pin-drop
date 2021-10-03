@@ -13,3 +13,6 @@
 .externalNativeBuild
 .cxx
 local.properties
+*.torch
+*.pkl
+*.hdf5
