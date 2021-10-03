@@ -1,1 +1,4 @@
 /build
+*.pkl
+*.hdf5
+*.torch
